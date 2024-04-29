@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   contact.cpp                                        :+:      :+:    :+:   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 22:37:51 by jules             #+#    #+#             */
-/*   Updated: 2024/04/29 02:14:39 by jules            ###   ########.fr       */
+/*   Updated: 2024/04/29 11:46:46 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ Contact::Contact(const Contact &c) {
 }
 
 Contact &Contact::operator=(const Contact &c) {
+	if (this == &c)
+		return (*this);
 	_first_name = c._first_name;
 	_last_name = c._last_name;
 	_nickname = c._nickname;

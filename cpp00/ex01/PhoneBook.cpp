@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 01:01:58 by jules             #+#    #+#             */
-/*   Updated: 2024/04/29 02:24:53 by jules            ###   ########.fr       */
+/*   Updated: 2024/04/29 11:46:57 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ PhoneBook::~PhoneBook() {
 }
 
 PhoneBook &PhoneBook::operator=(const PhoneBook& pb) {
+	if (this == &pb)
+		return (*this);
 	*this = PhoneBook(pb);
 	return (*this);
 }
