@@ -8,7 +8,7 @@ SRCS	=	Contact.cpp \
 DIR_BUILD	=	.build/
 OBJS		=	$(patsubst %.cpp, $(DIR_BUILD)%.o, $(SRCS))
 
-FLAGS		=	-Wall -Wextra -Werror -std=c++98 -fsanitize=address
+FLAGS		=	-Wall -Wextra -Werror -std=c++98
 CC			=	c++
 RM			=	rm -rf
 
