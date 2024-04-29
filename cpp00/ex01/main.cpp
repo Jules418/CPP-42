@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 22:51:11 by jules             #+#    #+#             */
-/*   Updated: 2024/04/29 02:23:01 by jules            ###   ########.fr       */
+/*   Updated: 2024/04/29 19:24:50 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int main(void) {
 			break;
 		std::cout << "Command : ";
 		std::getline(std::cin, command);
+		if (std::cin.fail())
+			return 1;
 	}
 	return (0);
 }
