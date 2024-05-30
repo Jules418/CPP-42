@@ -1,5 +1,5 @@
 
-NAME	=	clapTrap
+NAME	=	ScavTrap
 
 SRCS	=	main.cpp \
 				ClapTrap.cpp \
@@ -12,6 +12,7 @@ FLAGS		=	-Wall -Wextra -Werror -std=c++98 -g3
 CC			=	c++
 RM			=	rm -rf
 
+HEADER		=	ClapTrap.hpp ScavTrap.hpp
 
 DIR_INCLUDES	= .
 
@@ -25,7 +26,7 @@ DEPENDECIES	=
 all:
 	$(MAKE) $(NAME)
 
-$(NAME):	$(OBJS) $(DEPENDECIES)
+$(NAME):	$(OBJS) $(DEPENDECIES) $(HEADER)
 	$(CC) $(FLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
 clean:
