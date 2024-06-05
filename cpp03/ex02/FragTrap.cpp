@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbanacze <jbanacze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 14:58:45 by jbanacze          #+#    #+#             */
-/*   Updated: 2024/06/03 09:54:49 by jbanacze         ###   ########.fr       */
+/*   Updated: 2024/06/03 09:54:35 by jbanacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 #include <iostream>
 
-ScavTrap::ScavTrap() : ClapTrap(){
-	std::cout << "ScavTrap default Constructor" << std::endl;
+FragTrap::FragTrap() : ClapTrap(){
+	std::cout << "FragTrap default Constructor" << std::endl;
 }
 
-ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name){
-	std::cout << "ScavTrap is created" << std::endl;
+FragTrap::FragTrap(const std::string &name) : ClapTrap(name){
+	std::cout << "FragTrap is created" << std::endl;
 	this->_name = name;
 	this->_hitPoints = 100;
-	this->_energyPoints = 50;
-	this->_attackDamage = 20;
+	this->_energyPoints = 100;
+	this->_attackDamage = 30;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other) {
+FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other) {
 	*this = other;
 }
 
-ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
+FragTrap &FragTrap::operator=(const FragTrap &other) {
 	this->_name = other._name;
 	this->_hitPoints = other._hitPoints;
 	this->_energyPoints = other._energyPoints;
@@ -37,18 +37,18 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
 	return (*this);
 }
 
-ScavTrap::~ScavTrap() {
-	std::cout << "ScavTrap destructed" << std::endl;
+FragTrap::~FragTrap() {
+	std::cout << "FragTrap destructed" << std::endl;
 }
 
-void ScavTrap::attack(const std::string &target) {
+void FragTrap::attack(const std::string &target) {
 	if (this->_hitPoints && this->_energyPoints) {
-		std::cout << "ScavTrap " << this->_name << " attacks " << target;
+		std::cout << "FragTrap " << this->_name << " attacks " << target;
 		std::cout << ", causing " << this->_attackDamage << " points of damage !" << std::endl;
 		this->_energyPoints--;
 	}
 }
 
-void ScavTrap::guardGate() {
-	std::cout << "ScavTrap is in gate keeper mode" << std::endl;
+void FragTrap::highFivesGuys() {
+	std::cout << "FragTrap is highfiving !	" << std::endl;
 }
