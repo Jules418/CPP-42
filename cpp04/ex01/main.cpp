@@ -6,12 +6,13 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 17:36:16 by jbanacze          #+#    #+#             */
-/*   Updated: 2024/06/05 20:49:02 by jules            ###   ########.fr       */
+/*   Updated: 2024/06/05 23:11:55 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string>
 #include <iostream>
+#include <cstdlib>
 
 #include "Animal.hpp"
 #include "Dog.hpp"
@@ -20,43 +21,31 @@
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
-int main()
+
+int main(int argc, char *argv[])
 {
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	std::cout << std::endl << std::endl;
+	int size;
 
-	const WrongAnimal* Wmeta = new WrongAnimal();
-	const WrongAnimal* Wcat = new WrongCat();
-	std::cout << std::endl << std::endl;
+	if (argc == 1)
+		size = 10;
+	else
+		size = std::atoi(argv[1]);
+	
+	Animal **pets = new Animal*[size];
+	
+	int	i;
+	for (i = 0; i < (size / 2); i++)
+		pets[i] = new Dog();
+	for (; i < size; i++)
+		pets[i] = new Cat();
+	
+	for (int i = 0; i < size / 2; i++)
+		delete pets[i];
+	
+	for (; i < size; i++)
+		pets[i]->~Animal();
 
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	std::cout << std::endl << std::endl;
-
-	i->makeSound(); //will output the cat sound!
-	j->makeSound();
-	meta->makeSound();
-	std::cout << std::endl << std::endl;
-
-	std::cout << "Wrong animals" << std::endl;
-
-	std::cout << Wmeta->getType() << " " << std::endl;
-	std::cout << Wcat->getType() << " " << std::endl;
-	std::cout << std::endl << std::endl;
-
-	Wmeta->makeSound();
-	Wcat->makeSound();
-	std::cout << std::endl << std::endl;
-
-
-	delete meta;
-	delete j;
-	delete i;
-
-	delete Wmeta;
-	delete Wcat;
+	delete[] pets;
 
 	return 0;
 }
