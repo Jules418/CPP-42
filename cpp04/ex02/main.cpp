@@ -6,7 +6,7 @@
 /*   By: jbanacze <jbanacze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 17:36:16 by jbanacze          #+#    #+#             */
-/*   Updated: 2024/06/09 11:13:44 by jbanacze         ###   ########.fr       */
+/*   Updated: 2024/06/09 11:26:26 by jbanacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,16 @@ int main(int argc, char *argv[])
 	for (int i = 0; i < size; i++)
 		delete pets[i];
 	delete[] pets;
+
+
+	/*
+	
+	Animal rdmLivingCreature();
+	Animal scndOne;
+
+	scndOne = Animal();
+	
+	*/
 
 	return 0;
 }
