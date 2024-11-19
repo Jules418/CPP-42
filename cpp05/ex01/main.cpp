@@ -6,18 +6,23 @@ int main() {
 	{	
 		Bureaucrat *a = new Bureaucrat("Malfrat", 145);
 		Bureaucrat *b = new Bureaucrat("Boss", 1);
-		Form *c = new Form("Contrat de crime", 140, 100);
+		Form *c = new Form("Crime certificate", 140, 100);
 
 		std::cout << *a;
+		std::cout << std::endl;
 		std::cout << *b;
+		std::cout << std::endl;
 		std::cout << *c;
+		std::cout << std::endl;
 
 		a->signForm(*c);
 		
 		std::cout << *c;
+		std::cout << std::endl;
 		c->beSigned(*b);
 
 		std::cout << *c;
+		std::cout << std::endl;
 
 		// try signing the from again
 		b->signForm(*c);
@@ -29,7 +34,7 @@ int main() {
 
 	Form *a = NULL;
 
-	// sign-grade too high
+	// sign too high
 	try
 	{
 		a = new Form("Form", 160, 145);
@@ -39,7 +44,7 @@ int main() {
 		std::cout << "Error : " << e.what() << std::endl;
 	}
 
-	// exec-grade too high
+	// exec too high
 	try
 	{
 		a = new Form("Form", 145, 160);
@@ -49,7 +54,7 @@ int main() {
 		std::cout << "Error : " << e.what() << std::endl;
 	}
 
-	// sign-grade too low
+	// sign  too low
 	try
 	{
 		a = new Form("Form", -15, 145);
@@ -59,7 +64,7 @@ int main() {
 		std::cout << "Error : " << e.what() << std::endl;
 	}
 
-	// exec-grade too low
+	// exec too low
 	try
 	{
 		a = new Form("Form", 145, -15);
@@ -69,11 +74,10 @@ int main() {
 		std::cout << "Error : " << e.what() << std::endl;
 	}
 
-	// Deconstruction to prevent unused variable, in this case will never be called
+	// just in case
 	if (a != NULL)
 	{
 		std::cout << std::endl;
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
 		delete a;
 	}
 
