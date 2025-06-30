@@ -1,38 +1,82 @@
 #include "AForm.hpp"
 
-AForm::AForm(short signGrade, short execGrade, string name, string target) : 
-_signGrade(signGrade), _execGrade(execGrade), _name(name), _target(target), _isSigned(false) {}
-
+AForm::AForm() : _name("DEFAULT"), _been_signed(false), _min_grade_sign(150), _min_grade_exec(150) {}
 AForm::~AForm() {}
 
-const char* AForm::GradeTooHighException::what() const throw() {
-    return "The AForm grade is too high !\n";
+AForm::AForm(const AForm& f) :  _name(f.getName()), 
+								_been_signed(f.getSignedStatus()), 
+								_min_grade_sign(f.getMinGradeToSign()), 
+								_min_grade_exec(f.getMinGradeToExec()) {}
+
+AForm& AForm::operator=(const AForm& f) {
+	//nothing to do here
+	if (this==&f)
+		return *this;
+	return *this;
 }
 
-const char* AForm::GradeTooLowException::what() const throw() {
-    return "The AForm grade is too low !\n";
+AForm::AForm(const std::string name, const int min_sign, const int min_exec) : 
+								_name(name),
+								_been_signed(false),
+								_min_grade_sign(min_sign),
+								_min_grade_exec(min_exec) 
+{
+	if ((min_sign < 1) || (min_exec < 1))
+		throw AForm::GradeTooHighException();
+	if ((min_sign > 150) || (min_exec > 150))
+		throw AForm::GradeTooLowException();
 }
 
-void AForm::beSigned(const Bureaucrat &b) { 
-    if (b.getGrade() > this->_signGrade)
+std::string AForm::getName() const {
+	return _name;
+}
+
+bool AForm::getSignedStatus() const {
+	return _been_signed;
+}
+
+int AForm::getMinGradeToSign() const {
+	return _min_grade_sign;
+}
+
+int AForm::getMinGradeToExec() const {
+	return _min_grade_exec;
+}
+
+const char *AForm::GradeTooHighException::what() const throw() {
+	return "Grade too high";
+}
+
+const char *AForm::GradeTooLowException::what() const throw() {
+	return "Grade too low";
+}
+
+const char *AForm::FormNotSignedException::what() const throw() {
+	return "Form not signed";
+}
+
+void AForm::beSigned(Bureaucrat &b) {
+	if (b.getGrade() > _min_grade_sign)
+		throw AForm::GradeTooLowException();
+	_been_signed = true;
+}
+
+void AForm::execute(const Bureaucrat& executor) const {
+    if (!this->getSignedStatus())
+        throw AForm::FormNotSignedException();
+    if (executor.getGrade() > this->getMinGradeToExec())
         throw AForm::GradeTooLowException();
-    if (this->_isSigned == false)
-        this->_isSigned = true;
+
+    this->concreteExecute();
 }
 
-short AForm::getExecGrade()     const { return this->_execGrade; }
-short AForm::getSigneGrade()    const { return this->_signGrade; }
-bool AForm::getFormState()      const { return this->_isSigned; }
-string AForm::getTarget()       const { return this->_target; }
-string AForm::getName()         const { return this->_name; }
-
-std::ostream &operator<<(std::ostream& os, AForm const &x) {
-    os << "The AForm " << x.getName() << " requires grade " << x.getSigneGrade() << " to be signed and grade " << x.getExecGrade() << " to be executed. ";
-    if (x.getFormState() == true)
-        os << "The AForm is signed.";
-    else if (x.getFormState() == false)
-        os << "The AForm isn't signed.";
-    return os;
+std::ostream &operator<<(std::ostream &os, const AForm& f) {
+	os << "The " << f.getName() << " form needs a grade ";
+	os << f.getMinGradeToSign() << " to be signed and a grade ";
+	os << f.getMinGradeToExec() << " to be executed." << std::endl;
+	os << "The form has ";
+	if (!f.getSignedStatus())
+		os << "not ";
+	os << "been signed.";
+	return os;
 }
-
-void AForm::setSignature(bool state) {this->_isSigned = state; }

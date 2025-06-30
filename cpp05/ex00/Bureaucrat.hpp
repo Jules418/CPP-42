@@ -18,6 +18,10 @@
 # include <iostream>
 
 class Bureaucrat {
+	private:
+		const std::string _name;
+		int	_grade;
+		
 	public:
 		Bureaucrat();
 		~Bureaucrat();
@@ -41,12 +45,6 @@ class Bureaucrat {
 			public:
 				virtual const char *what() const throw();
 		};
-
-
-	private:
-		const std::string _name;
-		int	_grade;
-		
 };
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat& b);

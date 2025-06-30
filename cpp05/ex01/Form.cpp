@@ -9,7 +9,6 @@ Form::Form(const Form& f) :  _name(f.getName()),
 								_min_grade_exec(f.getMinGradeToExec()) {}
 
 Form& Form::operator=(const Form& f) {
-	//nothing to do here
 	if (this==&f)
 		return *this;
 	return *this;
